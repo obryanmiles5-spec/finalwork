@@ -1,0 +1,6 @@
+{
+  "name": "BuyRetat UK Store",
+  "description": "Premium, high-converting WooCommerce storefront for BuyRetat UK, specializing in research peptides with lab test results, automated coupon codes, custom checkout flow, and full SEO/marketing optimization.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
