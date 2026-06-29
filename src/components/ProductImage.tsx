@@ -82,13 +82,7 @@ export function ProductImage({ productId, alt, className = '', loading = 'lazy',
   const getCandidates = () => {
     const list: string[] = [];
     
-    // 1. Lowercase shop-page folder + kebab name
-    if (kebabName) {
-      list.push(`/shop-page/${kebabName}`);
-      list.push(`shop-page/${kebabName}`);
-    }
-    
-    // 2. Capitalized Shop Page folder + original name (encoded)
+    // 1. Capitalized Shop Page folder + original name (encoded) - guaranteed to exist in public
     if (origName) {
       const encodedOrig = origName.replace(/ /g, '%20').replace(/\+/g, '%2B');
       list.push(`/Shop Page/${encodedOrig}`);
@@ -96,6 +90,12 @@ export function ProductImage({ productId, alt, className = '', loading = 'lazy',
       // Unencoded
       list.push(`/Shop Page/${origName}`);
       list.push(`Shop Page/${origName}`);
+    }
+
+    // 2. Lowercase shop-page folder + kebab name
+    if (kebabName) {
+      list.push(`/shop-page/${kebabName}`);
+      list.push(`shop-page/${kebabName}`);
     }
     
     // 3. Capitalized Shop Page folder + kebab name
