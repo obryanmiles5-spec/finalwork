@@ -521,7 +521,7 @@ Please confirm receipt of this order and send payment verification details. Than
               <div key={item.product.id} className="flex justify-between items-center text-xs">
                 <div className="flex items-center space-x-3">
                   <div className="w-10 h-10 bg-slate-50 border border-gray-100 p-0.5 rounded-lg flex items-center justify-center shrink-0">
-                    <ProductImage productId={item.product.id} alt={item.product.name} className="w-full h-full object-contain" fallbackSvg={item.product.image} />
+                    <ProductImage productId={item.product.id} alt={item.product.name} className="w-full h-full object-contain" fallbackSvg={item.product.fallbackSvg} />
                   </div>
                   <div>
                     <strong className="text-gray-800 line-clamp-1">{item.product.name}</strong>

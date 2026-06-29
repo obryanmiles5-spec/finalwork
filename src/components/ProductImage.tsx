@@ -82,13 +82,18 @@ export function ProductImage({ productId, alt, className = '', loading = 'lazy',
   const getCandidates = () => {
     const list: string[] = [];
     
-    // 1. Capitalized Shop Page folder + original name (encoded) - Primary setting that worked live
+    // 1. Capitalized Shop%20Page folder + original name (encoded) - Primary setting that worked live
     if (origName) {
       const encodedOrig = origName.replace(/ /g, '%20').replace(/\+/g, '%2B');
+      list.push(`/Shop%20Page/${encodedOrig}`);
       list.push(`/Shop Page/${encodedOrig}`);
+      list.push(`Shop%20Page/${encodedOrig}`);
       list.push(`Shop Page/${encodedOrig}`);
-      // Unencoded
+      
+      // Unencoded / space-fallback
+      list.push(`/Shop%20Page/${origName}`);
       list.push(`/Shop Page/${origName}`);
+      list.push(`Shop%20Page/${origName}`);
       list.push(`Shop Page/${origName}`);
     }
     
@@ -98,9 +103,11 @@ export function ProductImage({ productId, alt, className = '', loading = 'lazy',
       list.push(`shop-page/${kebabName}`);
     }
     
-    // 3. Capitalized Shop Page folder + kebab name
+    // 3. Capitalized Shop%20Page folder + kebab name
     if (kebabName) {
+      list.push(`/Shop%20Page/${kebabName}`);
       list.push(`/Shop Page/${kebabName}`);
+      list.push(`Shop%20Page/${kebabName}`);
       list.push(`Shop Page/${kebabName}`);
     }
     

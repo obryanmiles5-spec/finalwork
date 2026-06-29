@@ -940,6 +940,7 @@ const imageMapping: Record<string, string> = {
 
 // Apply real images over SVG placeholders
 for (const product of products) {
+  product.fallbackSvg = product.image; // Preserve the beautifully generated SVG as the ultimate fallback
   if (imageMapping[product.id]) {
     product.image = imageMapping[product.id];
   }

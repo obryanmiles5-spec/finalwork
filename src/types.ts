@@ -7,6 +7,7 @@ export interface Product {
   concentration: string; // e.g. "5mg", "10mg"
   price: number;
   image: string; // Base64 or SVG placeholder data
+  fallbackSvg?: string; // Preserve original SVG if image path is overridden
   badge?: 'Featured' | 'New' | 'Best Seller' | null;
   shortDesc: string;
   longDesc: string;
