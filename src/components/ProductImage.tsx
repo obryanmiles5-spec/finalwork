@@ -82,34 +82,36 @@ export function ProductImage({ productId, alt, className = '', loading = 'lazy',
   const getCandidates = () => {
     const list: string[] = [];
     
-    // 1. Lowercase shop-page folder + kebab name - PRIMARY CLEANEST standard path
+    // 1. Capitalized Shop%20Page folder + original name (encoded) - Primary setting that matches Git and works 100% on Cloudflare
+    if (origName) {
+      const encodedOrig = origName
+        .replace(/ /g, '%20')
+        .replace(/\+/g, '%2B')
+        .replace(/\(/g, '%28')
+        .replace(/\)/g, '%29');
+      list.push(`/Shop%20Page/${encodedOrig}`);
+      list.push(`Shop%20Page/${encodedOrig}`);
+      list.push(`/Shop Page/${encodedOrig}`);
+      list.push(`Shop Page/${encodedOrig}`);
+    }
+
+    // 2. Lowercase shop-page folder + kebab name - Secondary fallback
     if (kebabName) {
       list.push(`/shop-page/${kebabName}`);
       list.push(`shop-page/${kebabName}`);
     }
     
-    // 2. Lowercase shop-page folder + original name (encoded)
+    // 3. Lowercase shop-page folder + original name (encoded)
     if (origName) {
-      const encodedOrig = origName.replace(/ /g, '%20').replace(/\+/g, '%2B');
+      const encodedOrig = origName
+        .replace(/ /g, '%20')
+        .replace(/\+/g, '%2B')
+        .replace(/\(/g, '%28')
+        .replace(/\)/g, '%29');
       list.push(`/shop-page/${encodedOrig}`);
       list.push(`shop-page/${encodedOrig}`);
     }
 
-    // 3. Capitalized Shop%20Page folder + original name (encoded) - Secondary fallback
-    if (origName) {
-      const encodedOrig = origName.replace(/ /g, '%20').replace(/\+/g, '%2B');
-      list.push(`/Shop%20Page/${encodedOrig}`);
-      list.push(`/Shop Page/${encodedOrig}`);
-      list.push(`Shop%20Page/${encodedOrig}`);
-      list.push(`Shop Page/${encodedOrig}`);
-      
-      // Unencoded / space-fallback
-      list.push(`/Shop%20Page/${origName}`);
-      list.push(`/Shop Page/${origName}`);
-      list.push(`Shop%20Page/${origName}`);
-      list.push(`Shop Page/${origName}`);
-    }
-    
     // 4. Capitalized Shop%20Page folder + kebab name
     if (kebabName) {
       list.push(`/Shop%20Page/${kebabName}`);

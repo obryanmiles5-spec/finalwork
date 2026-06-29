@@ -93,7 +93,12 @@ export default function QuickViewModal({
                       onClick={() => onSelectRelated(rel)}
                       className="bg-[#f8fafc] hover:bg-[#eef4f4] border border-gray-100 hover:border-[#2e5b62]/30 p-2.5 rounded-xl cursor-pointer flex flex-col items-center justify-between transition-colors h-24"
                     >
-                      <img src={rel.image} alt={rel.name} className="w-10 h-10 object-contain" referrerPolicy="no-referrer" />
+                      <ProductImage 
+                        productId={rel.id} 
+                        alt={rel.name} 
+                        className="w-10 h-10 object-contain" 
+                        fallbackSvg={rel.fallbackSvg}
+                      />
                       <span className="text-[9px] font-sans font-bold text-center text-gray-700 truncate w-full">{rel.concentration} {rel.category}</span>
                     </div>
                   ))}
