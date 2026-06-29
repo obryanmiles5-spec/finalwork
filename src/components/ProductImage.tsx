@@ -82,7 +82,20 @@ export function ProductImage({ productId, alt, className = '', loading = 'lazy',
   const getCandidates = () => {
     const list: string[] = [];
     
-    // 1. Capitalized Shop%20Page folder + original name (encoded) - Primary setting that worked live
+    // 1. Lowercase shop-page folder + kebab name - PRIMARY CLEANEST standard path
+    if (kebabName) {
+      list.push(`/shop-page/${kebabName}`);
+      list.push(`shop-page/${kebabName}`);
+    }
+    
+    // 2. Lowercase shop-page folder + original name (encoded)
+    if (origName) {
+      const encodedOrig = origName.replace(/ /g, '%20').replace(/\+/g, '%2B');
+      list.push(`/shop-page/${encodedOrig}`);
+      list.push(`shop-page/${encodedOrig}`);
+    }
+
+    // 3. Capitalized Shop%20Page folder + original name (encoded) - Secondary fallback
     if (origName) {
       const encodedOrig = origName.replace(/ /g, '%20').replace(/\+/g, '%2B');
       list.push(`/Shop%20Page/${encodedOrig}`);
@@ -97,25 +110,12 @@ export function ProductImage({ productId, alt, className = '', loading = 'lazy',
       list.push(`Shop Page/${origName}`);
     }
     
-    // 2. Lowercase shop-page folder + kebab name - Secondary fallback
-    if (kebabName) {
-      list.push(`/shop-page/${kebabName}`);
-      list.push(`shop-page/${kebabName}`);
-    }
-    
-    // 3. Capitalized Shop%20Page folder + kebab name
+    // 4. Capitalized Shop%20Page folder + kebab name
     if (kebabName) {
       list.push(`/Shop%20Page/${kebabName}`);
       list.push(`/Shop Page/${kebabName}`);
       list.push(`Shop%20Page/${kebabName}`);
       list.push(`Shop Page/${kebabName}`);
-    }
-    
-    // 4. Lowercase shop-page folder + original name (encoded)
-    if (origName) {
-      const encodedOrig = origName.replace(/ /g, '%20').replace(/\+/g, '%2B');
-      list.push(`/shop-page/${encodedOrig}`);
-      list.push(`shop-page/${encodedOrig}`);
     }
 
     // 5. If there is a fallback SVG provided from the products database
