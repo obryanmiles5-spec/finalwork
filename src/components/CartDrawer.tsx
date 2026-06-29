@@ -99,7 +99,7 @@ export default function CartDrawer({
                 >
                   {/* Small Product Icon */}
                   <div className="w-14 h-14 bg-white rounded-xl border border-gray-100 p-1 flex items-center justify-center shrink-0">
-                    <ProductImage productId={item.product.id} alt={item.product.name} className="w-full h-full object-contain" />
+                    <ProductImage productId={item.product.id} alt={item.product.name} className="w-full h-full object-contain" fallbackSvg={item.product.image} />
                   </div>
 
                   {/* Title and adjustments */}

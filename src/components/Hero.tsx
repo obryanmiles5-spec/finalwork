@@ -1,6 +1,7 @@
 import React from 'react';
 import { ShoppingCart, PhoneCall, ShieldCheck, Truck, Award, Zap } from 'lucide-react';
 import { ProductImage } from './ProductImage';
+import { getPeptideSvg } from '../data/products';
 
 interface HeroProps {
   onShopNowClick: () => void;
@@ -90,6 +91,7 @@ export default function Hero({ onShopNowClick }: HeroProps) {
                   productId="retatrutide-10mg"
                   alt="Alluvi Retat 10mg" 
                   className="w-full h-full object-contain transform group-hover:scale-105 transition-transform duration-500"
+                  fallbackSvg={getPeptideSvg('#2e5b62', '#10b981', 'RETAT', '10 MG')}
                 />
               </div>
 

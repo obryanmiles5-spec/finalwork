@@ -61,6 +61,7 @@ export default function QuickViewModal({
                   productId={product.id}
                   alt={product.name} 
                   className="w-full h-full object-contain"
+                  fallbackSvg={product.image}
                 />
                 
                 {/* Certified badges overlay */}
