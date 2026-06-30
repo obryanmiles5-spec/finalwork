@@ -426,7 +426,7 @@ export default function App() {
             {/* 8. NEWSLETTER SIGNUP */}
             <section 
               className="relative py-20 border-t border-b border-gray-200/50 bg-cover bg-center overflow-hidden"
-              style={{ backgroundImage: "url('/Bckground Image.png')" }}
+              style={{ backgroundImage: "url('Bckground%20Image.png')" }}
             >
               {/* Overlay for high contrast and readability */}
               <div className="absolute inset-0 bg-slate-900/80 backdrop-blur-[1px]" />
@@ -835,7 +835,7 @@ export default function App() {
           <div className="space-y-4">
             <div className="flex items-center space-x-2">
               <div className="w-10 h-10 flex items-center justify-center">
-                <img src="/Buy Retat Logo.png" alt="BuyRetat UK Logo" className="h-full w-auto object-contain rounded" referrerPolicy="no-referrer" />
+                <img src="Buy%20Retat%20Logo.png" alt="BuyRetat UK Logo" className="h-full w-auto object-contain rounded" referrerPolicy="no-referrer" />
               </div>
               <span className="font-sans font-black text-base tracking-[0.15em] text-white">ALLUVI UK</span>
             </div>

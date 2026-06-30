@@ -55,12 +55,12 @@ export default function Header({
   ];
 
   return (
-    <>
+    <header className="w-full relative z-50">
       {/* 1. TOP ANNOUNCEMENT BAR (ROTATING SLIDER) */}
       <div 
         id="announcement-bar"
         onClick={handleAnnouncementClick}
-        className="w-full relative z-50 bg-[#0f1a1c] text-[#eef4f4] py-2 px-4 text-xs font-medium cursor-pointer transition-all duration-500 flex items-center justify-center select-none border-b border-[#2e5b62]/20 hover:bg-[#132c30]"
+        className="w-full bg-[#0f1a1c] text-[#eef4f4] py-2 px-4 text-xs font-medium cursor-pointer transition-all duration-500 flex items-center justify-center select-none border-b border-[#2e5b62]/20 hover:bg-[#132c30]"
       >
         <div className="flex items-center space-x-2 animate-fade-in text-center max-w-lg md:max-w-none">
           <Sparkles className="w-3.5 h-3.5 text-[#d97706] shrink-0 animate-pulse" />
@@ -69,7 +69,7 @@ export default function Header({
       </div>
 
       {/* 2. MAIN STICKY HEADER */}
-      <header className="w-full bg-white/95 backdrop-blur-md border-b border-[#2e5b62]/10 sticky top-0 z-50 shadow-sm transition-all duration-300">
+      <div className="w-full bg-white/95 backdrop-blur-md border-b border-[#2e5b62]/10 sticky top-0 shadow-sm transition-all duration-300">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
           
           {/* Logo Section */}
@@ -80,7 +80,7 @@ export default function Header({
           >
             {/* Brand Logo: Buy Retat Logo.png */}
             <div className="w-15 h-15 flex items-center justify-center group-hover:scale-105 transition-transform duration-300">
-              <img src="/Buy Retat Logo.png" alt="BuyRetat UK Logo" className="h-full w-auto object-contain rounded-lg" referrerPolicy="no-referrer" />
+              <img src="Buy%20Retat%20Logo.png" alt="BuyRetat UK Logo" className="h-full w-auto object-contain rounded-lg" referrerPolicy="no-referrer" />
             </div>
             <div>
               <div className="flex items-center space-x-1.5">
@@ -174,7 +174,7 @@ export default function Header({
           </div>
 
         </div>
-      </header>
+      </div>
 
       {/* 3. MOBILE MENU SLIDE-DOWN */}
       {isMobileMenuOpen && (
@@ -207,6 +207,6 @@ export default function Header({
           </div>
         </div>
       )}
-    </>
+    </header>
   );
 }
