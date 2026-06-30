@@ -878,7 +878,7 @@ export default function App() {
           <div className="space-y-4">
             <div className="flex items-center space-x-2">
               <div className="w-10 h-10 flex items-center justify-center">
-                <img src="Buy%20Retat%20Logo.png" alt="BuyRetat UK Logo" className="h-full w-auto object-contain rounded" referrerPolicy="no-referrer" />
+                <img src="/Buy%20Retat%20Logo.png" alt="BuyRetat UK Logo" className="h-full w-auto object-contain rounded" referrerPolicy="no-referrer" />
               </div>
               <span className="font-sans font-black text-base tracking-[0.15em] text-white">ALLUVI UK</span>
             </div>
