@@ -82,7 +82,13 @@ export function ProductImage({ productId, alt, className = '', loading = 'lazy',
   const getCandidates = () => {
     const list: string[] = [];
     
-    // 1. Capitalized Shop%20Page folder + original name (encoded) - Primary setting that worked live (Relative first)
+    // 1. Lowercase shop-page folder + kebab name - CLEANEST, CASE-SAFE, SPACE-SAFE, RELATIVE (Instant 1st-try load on Cloudflare)
+    if (kebabName) {
+      list.push(`shop-page/${kebabName}`);
+      list.push(`/shop-page/${kebabName}`);
+    }
+    
+    // 2. Capitalized Shop%20Page folder + original name (encoded) - Legacy fallback (Relative first)
     if (origName) {
       const encodedOrig = origName.replace(/ /g, '%20').replace(/\+/g, '%2B');
       list.push(`Shop%20Page/${encodedOrig}`);
@@ -95,12 +101,6 @@ export function ProductImage({ productId, alt, className = '', loading = 'lazy',
       list.push(`Shop Page/${origName}`);
       list.push(`/Shop%20Page/${origName}`);
       list.push(`/Shop Page/${origName}`);
-    }
-    
-    // 2. Lowercase shop-page folder + kebab name - Secondary fallback (Relative first)
-    if (kebabName) {
-      list.push(`shop-page/${kebabName}`);
-      list.push(`/shop-page/${kebabName}`);
     }
     
     // 3. Capitalized Shop%20Page folder + kebab name (Relative first)
