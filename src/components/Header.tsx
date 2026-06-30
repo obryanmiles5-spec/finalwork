@@ -80,7 +80,7 @@ export default function Header({
           >
             {/* Brand Logo: Buy Retat Logo.png */}
             <div className="w-15 h-15 flex items-center justify-center group-hover:scale-105 transition-transform duration-300">
-              <img src="Buy%20Retat%20Logo.png" alt="BuyRetat UK Logo" className="h-full w-auto object-contain rounded-lg" referrerPolicy="no-referrer" />
+              <img src="/Buy%20Retat%20Logo.png" alt="BuyRetat UK Logo" className="h-full w-auto object-contain rounded-lg" referrerPolicy="no-referrer" />
             </div>
             <div>
               <div className="flex items-center space-x-1.5">

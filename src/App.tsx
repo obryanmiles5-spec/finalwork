@@ -456,7 +456,7 @@ export default function App() {
             {/* 8. NEWSLETTER SIGNUP */}
             <section 
               className="relative py-20 border-t border-b border-gray-200/50 bg-cover bg-center overflow-hidden"
-              style={{ backgroundImage: "url('Bckground%20Image.png')" }}
+              style={{ backgroundImage: "url('/Bckground%20Image.png')" }}
             >
               {/* Overlay for high contrast and readability */}
               <div className="absolute inset-0 bg-slate-900/80 backdrop-blur-[1px]" />
