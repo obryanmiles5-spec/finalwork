@@ -98,6 +98,91 @@ export function getPeptideSvg(color: string, capColor: string, label: string, mg
   </svg>`;
 }
 
+export function getCaseSvg(): string {
+  return `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width="100%" height="100%">
+    <defs>
+      <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stop-color="%231e293b" />
+        <stop offset="100%" stop-color="%230f172a" />
+      </linearGradient>
+      <linearGradient id="caseMetal" x1="0%" y1="0%" x2="100%" y2="0%">
+        <stop offset="0%" stop-color="%23475569" />
+        <stop offset="50%" stop-color="%2364748b" />
+        <stop offset="100%" stop-color="%23334155" />
+      </linearGradient>
+      <linearGradient id="foam" x1="0%" y1="0%" x2="0%" y2="100%">
+        <stop offset="0%" stop-color="%230f172a" />
+        <stop offset="100%" stop-color="%231e293b" />
+      </linearGradient>
+      <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%">
+        <feDropShadow dx="0" dy="12" stdDeviation="16" flood-color="%23020617" flood-opacity="0.4" />
+      </filter>
+    </defs>
+    
+    <!-- Background -->
+    <rect width="100%" height="100%" fill="url(%23bg)" rx="24"/>
+    
+    <!-- Technical Grid Accent -->
+    <g stroke="%2338bdf8" stroke-opacity="0.05" stroke-width="1">
+      <line x1="40" y1="0" x2="40" y2="400" />
+      <line x1="120" y1="0" x2="120" y2="400" />
+      <line x1="200" y1="0" x2="200" y2="400" />
+      <line x1="280" y1="0" x2="280" y2="400" />
+      <line x1="360" y1="0" x2="360" y2="400" />
+      <line x1="0" y1="80" x2="400" y2="80" />
+      <line x1="0" y1="160" x2="400" y2="160" />
+      <line x1="0" y1="240" x2="400" y2="240" />
+      <line x1="0" y1="320" x2="400" y2="320" />
+    </g>
+
+    <!-- Lab Shadow -->
+    <ellipse cx="200" cy="355" rx="100" ry="12" fill="%23020617" opacity="0.6" />
+
+    <!-- Case Body -->
+    <g filter="url(%23shadow)">
+      <!-- Main Outer Shell -->
+      <rect x="70" y="80" width="260" height="240" fill="url(%23caseMetal)" rx="16" stroke="%2394a3b8" stroke-width="2"/>
+      
+      <!-- Inner Foam Layer -->
+      <rect x="85" y="95" width="230" height="210" fill="url(%23foam)" rx="8" stroke="%23334155" stroke-width="1.5"/>
+      
+      <!-- Aluminium Trim / Border Highlights -->
+      <path d="M 70,160 L 330,160" stroke="%231e293b" stroke-width="4" />
+      <path d="M 70,160 L 330,160" stroke="%23cbd5e1" stroke-width="1.5" />
+      
+      <!-- Heavy Duty latches -->
+      <rect x="110" y="145" width="30" height="30" fill="%231e293b" rx="4" stroke="%2364748b" stroke-width="1" />
+      <rect x="117" y="152" width="16" height="16" fill="%2394a3b8" rx="2" />
+      
+      <rect x="260" y="145" width="30" height="30" fill="%231e293b" rx="4" stroke="%2364748b" stroke-width="1" />
+      <rect x="267" y="152" width="16" height="16" fill="%2394a3b8" rx="2" />
+      
+      <!-- Carrying Handle -->
+      <path d="M 150,80 L 150,60 C 150,54 154,50 160,50 L 240,50 C 246,50 250,54 250,60 L 250,80" fill="none" stroke="%23334155" stroke-width="12" stroke-linecap="round"/>
+      <path d="M 150,80 L 150,60 C 150,54 154,50 160,50 L 240,50 C 246,50 250,54 250,60 L 250,80" fill="none" stroke="%2364748b" stroke-width="6" stroke-linecap="round"/>
+
+      <!-- Reinforced Corners -->
+      <path d="M 70,105 C 70,90 85,80 100,80" fill="none" stroke="%231e293b" stroke-width="6" />
+      <path d="M 300,80 C 315,80 330,90 330,105" fill="none" stroke="%231e293b" stroke-width="6" />
+      <path d="M 70,295 C 70,310 85,320 100,320" fill="none" stroke="%231e293b" stroke-width="6" />
+      <path d="M 300,320 C 315,320 330,310 330,295" fill="none" stroke="%231e293b" stroke-width="6" />
+
+      <!-- High Tech Laser Engraved Badge on Lid -->
+      <rect x="140" y="225" width="120" height="50" fill="%230f172a" rx="6" stroke="%2338bdf8" stroke-width="1" stroke-opacity="0.3"/>
+      <text x="200" y="245" font-family="'Inter', sans-serif" font-weight="900" font-size="10" fill="%23f8fafc" text-anchor="middle" letter-spacing="1">ALLUVI LABS</text>
+      <text x="200" y="260" font-family="'JetBrains Mono', monospace" font-weight="700" font-size="6.5" fill="%2338bdf8" text-anchor="middle" letter-spacing="2">VIAL ORGANISER</text>
+      <text x="200" y="268" font-family="'Inter', sans-serif" font-weight="bold" font-size="5" fill="%2310b981" text-anchor="middle">10 VIAL SLOTS</text>
+    </g>
+
+    <!-- Lab Stamp Badge on top right -->
+    <g transform="translate(320, 50)" opacity="0.8">
+      <circle cx="15" cy="15" r="22" fill="none" stroke="%2338bdf8" stroke-dasharray="2,2" stroke-width="1"/>
+      <text x="15" y="12" font-family="'Inter', sans-serif" font-weight="900" font-size="6.5" fill="%23f8fafc" text-anchor="middle">SECURE</text>
+      <text x="15" y="21" font-family="'Inter', sans-serif" font-weight="bold" font-size="7" fill="%2310b981" text-anchor="middle">CASE</text>
+    </g>
+  </svg>`;
+}
+
 export const products: Product[] = [
   // Retatrutide (1 to 4) - Focus Keyword: Retatrutide UK
   {
@@ -901,48 +986,90 @@ export const products: Product[] = [
     seoTitle: 'Tesamorelin 5mg UK | Buy Premium GHRH Analogs - Alluvi',
     seoMetaDesc: 'Buy premium Tesamorelin 5mg in the UK. Lyophilized peptide of >99% purity. HPLC tested with secure UK next-day delivery. Perfect for metabolic laboratory research.',
     schemaMarkup: '{"@context":"https://schema.org","@type":"Product","name":"Tesamorelin 5mg (Alluvi Premium)","offers":{"@type":"Offer","price":"54.00","priceCurrency":"GBP"}}'
+  },
+  {
+    id: 'mixed-vials-case',
+    name: 'Mixed Vials Case (Alluvi Premium)',
+    chemicalName: 'Vial Protective Storage Case',
+    category: 'Vitamins',
+    purity: 'N/A',
+    concentration: '10-Vial Case',
+    price: 45.00,
+    image: getCaseSvg(),
+    badge: 'New',
+    shortDesc: 'Premium laboratory storage and transportation case for chromatography reference vials. Houses up to 10 standard 2ml-10ml lyophilized peptide vials.',
+    longDesc: 'The Alluvi Premium Mixed Vials Case is a durable, impact-resistant storage system engineered for researchers who require secure, temperature-insulated containment for their peptide standards. Featuring precision-cut foam slots for up to 10 standard vials, an airtight gasket seal to prevent humidity ingress, and high-density polymer casing for thermal stabilization during transport or benchtop storage.',
+    benefits: [
+      'Precision-molded slots protect against mechanical vibration and breakage',
+      'High-grade thermal insulation layer slows temperature fluctuations',
+      'Compact, lab-bench friendly profile with dual-latch secure closure',
+      'Waterproof and dustproof gasket lining prevents atmospheric contamination'
+    ],
+    usageInfo: 'Insert reference standards dry and clean. Store the entire case within specified climate or refrigeration controls.',
+    storageInfo: 'Store clean and dry. Wipe outer casing with laboratory disinfectants (e.g. 70% ethanol) as required.',
+    specifications: {
+      'Vial Capacity': '10 slots (for standard 2ml, 3ml, or 10ml lab vials)',
+      'Material': 'High-density impact resistant polycarbonate and EVA foam',
+      'Insulation': 'Closed-cell high-density polyethylene insulation matrix',
+      'Closure': 'Dual action secure compression latch',
+      'Dimensions': '180mm x 110mm x 45mm'
+    },
+    faqs: [
+      {
+        question: 'What size vials does the Mixed Vials Case accommodate?',
+        answer: 'The case features custom precision-cut foam slots that snugly fit standard 2ml to 10ml chromatography and vaccine-style vials.'
+      },
+      {
+        question: 'Does the case provide active cooling?',
+        answer: 'No, the case provides passive thermal insulation to slow down temperature changes during transfer. For refrigeration, the entire case can be safely placed inside standard laboratory refrigerators.'
+      }
+    ],
+    seoTitle: 'Mixed Vials Case | Peptide Storage and Transport - Alluvi',
+    seoMetaDesc: 'Order the premium Alluvi Mixed Vials Case online. Insulated protective container for up to 10 lyophilized standard reference vials. Ideal for lab bench organisation.',
+    schemaMarkup: '{"@context":"https://schema.org","@type":"Product","name":"Mixed Vials Case (Alluvi Premium)","offers":{"@type":"Offer","price":"45.00","priceCurrency":"GBP"}}'
   }
 ];
 
-// Map real image paths from the "shop-page" folder
-const imageMapping: Record<string, string> = {
-  'retatrutide-2mg': 'shop-page/retatrutide-peptide.webp',
-  'retatrutide-5mg': 'shop-page/retatrutide-peptide.webp',
-  'retatrutide-10mg': 'shop-page/alluvi-analytical.webp',
-  'retatrutide-15mg': 'shop-page/retatrutide-peptide.webp',
-  'tirzepatide-5mg': 'shop-page/tirzepatide-peptide.webp',
-  'tirzepatide-10mg': 'shop-page/tirzepatide-peptide.webp',
-  'tirzepatide-15mg': 'shop-page/tirzepatide-15mg-lyophilized-peptide.webp',
-  'tirzepatide-20mg': 'shop-page/tirzepatide-peptide.webp',
-  'semaglutide-2mg': 'shop-page/semaglutide-peptide.png',
-  'semaglutide-5mg': 'shop-page/semaglutide-peptide.png',
-  'semaglutide-10mg': 'shop-page/semaglutide-10mg-lyophilized-peptide.webp',
-  'bpc-157-5mg': 'shop-page/bpc-157-peptide.jpg',
-  'bpc-157-10mg': 'shop-page/bpc-157-10mg-lyophilized-peptide.webp',
-  'bpc-157-15mg': 'shop-page/bpc-157-peptide.jpg',
-  'tb-500-2mg': 'shop-page/tb-500-peptide-thymosin-beta-4.jpg',
-  'tb-500-5mg': 'shop-page/tb-500-peptide-thymosin-beta-4.jpg',
-  'tb-500-10mg': 'shop-page/tb-500-10mg-lyophilized-peptide.webp',
-  'cjc-1295-nodac-5mg': 'shop-page/cjc-1295-peptide-no-dac.jpg',
-  'cjc-1295-wdac-5mg': 'shop-page/cjc-1295-peptide-no-dac.jpg',
-  'ipamorelin-5mg': 'shop-page/ipamorelin-5mg-lyophilized-peptide.avif',
-  'ipamorelin-10mg': 'shop-page/ipamorelin-peptide.jpg',
-  'ghk-cu-50mg': 'shop-page/ghk-cu-peptide.webp',
-  'ghk-cu-100mg': 'shop-page/ghk-cu-peptide.webp',
-  'melanotan-2-10mg': 'shop-page/melanotan-ii-peptide.webp',
-  'pt-141-10mg': 'shop-page/pt-141-peptide-bremelanotide.webp',
-  'epitalon-10mg': 'shop-page/epitalon-peptide.jpg',
-  'nad-plus-500mg': 'shop-page/nad-500mg-lyophilized-vial.webp',
-  'igf-1-lr3-1mg': 'shop-page/multi-peptide-copper-peptides.webp',
-  'hgh-fragment-176-191-5mg': 'shop-page/hgh-frag-176-191-5mg.webp',
-  'tesamorelin-5mg': 'shop-page/tesamorelin.webp'
+// Custom physical image paths mapping for absolute root paths on Cloudflare
+const customImages: Record<string, string> = {
+  'retatrutide-2mg': '/images/Retatrutide Peptide.webp',
+  'retatrutide-5mg': '/images/Retatrutide Peptide.webp',
+  'retatrutide-10mg': '/images/Retatrutide 10mg (Lyophilized Peptide).webp',
+  'retatrutide-15mg': '/images/Retatrutide Peptide.webp',
+  'tirzepatide-5mg': '/images/Tirzepatide Peptide.webp',
+  'tirzepatide-10mg': '/images/Tirzepatide Peptide.webp',
+  'tirzepatide-15mg': '/images/Tirzepatide 15mg (Lyophilized Peptide).webp',
+  'tirzepatide-20mg': '/images/Tirzepatide Peptide.webp',
+  'semaglutide-2mg': '/images/Semaglutide Peptide.png',
+  'semaglutide-5mg': '/images/Semaglutide Peptide.png',
+  'semaglutide-10mg': '/images/Semaglutide 10mg (Lyophilized Peptide).webp',
+  'bpc-157-5mg': '/images/BPC-157 Peptide.jpg',
+  'bpc-157-10mg': '/images/BPC-157 10mg (Lyophilized Peptide).webp',
+  'bpc-157-15mg': '/images/BPC-157 Peptide.jpg',
+  'tb-500-2mg': '/images/TB-500 Peptide (Thymosin Beta-4).jpg',
+  'tb-500-5mg': '/images/TB-500 Peptide (Thymosin Beta-4).jpg',
+  'tb-500-10mg': '/images/TB-500 10mg (Lyophilized Peptide).webp',
+  'cjc-1295-nodac-5mg': '/images/CJC-1295 No DAC 5mg (Lyophilized Peptide).jpeg',
+  'cjc-1295-wdac-5mg': '/images/CJC-1295 Peptide (No DAC).jpg',
+  'ipamorelin-5mg': '/images/Ipamorelin 5mg (Lyophilized Peptide).avif',
+  'ipamorelin-10mg': '/images/Ipamorelin Peptide.jpg',
+  'ghk-cu-50mg': '/images/GHK-Cu Peptide.webp',
+  'ghk-cu-100mg': '/images/GHK-Cu Peptide.webp',
+  'melanotan-2-10mg': '/images/Melanotan II 10mg (Lyophilized Peptide).png',
+  'pt-141-10mg': '/images/PT-141 Peptide (Bremelanotide).webp',
+  'epitalon-10mg': '/images/Epitalon 10mg (Lyophilized Peptide).png',
+  'nad-plus-500mg': '/images/NAD+ 500mg (Lyophilized Vial).webp',
+  'igf-1-lr3-1mg': '/images/MOTS-c Peptide.webp',
+  'hgh-fragment-176-191-5mg': '/images/HGH Frag 176-191 5mg.webp',
+  'tesamorelin-5mg': '/images/Tesamorelin Peptide.png',
+  'mixed-vials-case': '/images/Mixed Vials Case.jpg'
 };
 
-// Apply real images over SVG placeholders
+// Ensure fallbackSvg is preserved so that components can fall back to the beautifully generated SVGs
 for (const product of products) {
-  product.fallbackSvg = product.image; // Preserve the beautifully generated SVG as the ultimate fallback
-  if (imageMapping[product.id]) {
-    product.image = imageMapping[product.id];
+  product.fallbackSvg = product.image;
+  if (customImages[product.id]) {
+    product.image = customImages[product.id];
   }
 }
 

@@ -198,7 +198,24 @@ export default function App() {
                           p.category.toLowerCase().includes(searchQuery.toLowerCase());
     
     if (selectedCategory === 'All') return matchesSearch;
-    return matchesSearch && p.category.toLowerCase() === selectedCategory.toLowerCase();
+    
+    const catLower = p.category.toLowerCase();
+    const selLower = selectedCategory.toLowerCase();
+    
+    if (selLower === 'growth factor') {
+      return matchesSearch && (catLower.includes('growth hormone') || catLower.includes('growth factor'));
+    }
+    if (selLower === 'recovery') {
+      return matchesSearch && catLower.includes('healing');
+    }
+    if (selLower === 'cognitive') {
+      return matchesSearch && (catLower.includes('cosmetic') || catLower.includes('melanocortin'));
+    }
+    if (selLower === 'vitamins') {
+      return matchesSearch && (catLower.includes('vitamin') || catLower.includes('nad'));
+    }
+    
+    return matchesSearch && catLower === selLower;
   });
 
   return (
@@ -349,38 +366,51 @@ export default function App() {
             </section>
 
             {/* 6. FAQ PREVIEW (4 highly relevant FAQs) */}
-            <section className="max-w-4xl mx-auto px-4 py-8">
-              <div className="text-center space-y-2 mb-10">
-                <span className="font-mono text-xs text-[#2e5b62] font-bold uppercase">Scientific Support</span>
-                <h2 className="text-3xl font-sans font-black text-[#111827]">Frequently Answered Inquiries</h2>
-              </div>
+            <section 
+              className="max-w-4xl mx-auto px-6 py-12 my-12 rounded-3xl border border-gray-200/50 shadow-sm relative overflow-hidden bg-slate-900/5 text-white"
+              style={{ 
+                backgroundImage: 'url("/FAQS.avif")', 
+                backgroundSize: 'cover', 
+                backgroundPosition: 'center', 
+                backgroundRepeat: 'no-repeat' 
+              }}
+            >
+              {/* Soft overlay to ensure readability while keeping image fully visible and sharp */}
+              <div className="absolute inset-0 bg-slate-950/30 pointer-events-none" />
+              
+              <div className="relative z-10">
+                <div className="text-center space-y-2 mb-10">
+                  <span className="font-mono text-xs text-emerald-300 font-extrabold tracking-wider uppercase bg-slate-900/70 px-3 py-1 rounded-full inline-block">Scientific Support</span>
+                  <h2 className="text-3xl font-sans font-black text-white drop-shadow-sm">Frequently Answered Inquiries</h2>
+                </div>
 
-              <div className="space-y-3">
-                {faqs.slice(0, 4).map((faq, idx) => (
-                  <div key={faq.id} className="bg-white rounded-2xl border border-gray-100 overflow-hidden text-sm">
-                    <button
-                      onClick={() => setOpenFaqIndex(openFaqIndex === idx ? null : idx)}
-                      className="w-full bg-white hover:bg-slate-50 px-6 py-4 flex justify-between items-center text-[#132c30] font-semibold text-left transition-colors"
-                    >
-                      <span>{faq.question}</span>
-                      {openFaqIndex === idx ? <ChevronUp className="w-4 h-4 text-gray-400" /> : <ChevronDown className="w-4 h-4 text-gray-400" />}
-                    </button>
-                    {openFaqIndex === idx && (
-                      <div className="px-6 py-4 bg-slate-50 text-gray-500 leading-relaxed border-t border-gray-100 text-xs">
-                        {faq.answer}
-                      </div>
-                    )}
-                  </div>
-                ))}
-              </div>
+                <div className="space-y-3 max-w-2xl mx-auto">
+                  {faqs.slice(0, 4).map((faq, idx) => (
+                    <div key={faq.id} className="bg-white/95 hover:bg-white backdrop-blur-none rounded-2xl border border-white/10 overflow-hidden text-sm transition-all duration-200 shadow-sm">
+                      <button
+                        onClick={() => setOpenFaqIndex(openFaqIndex === idx ? null : idx)}
+                        className="w-full px-6 py-4 flex justify-between items-center text-[#132c30] font-bold text-left transition-colors"
+                      >
+                        <span>{faq.question}</span>
+                        {openFaqIndex === idx ? <ChevronUp className="w-4 h-4 text-[#2e5b62]" /> : <ChevronDown className="w-4 h-4 text-[#2e5b62]" />}
+                      </button>
+                      {openFaqIndex === idx && (
+                        <div className="px-6 py-4 bg-slate-50 text-slate-600 font-medium leading-relaxed border-t border-slate-100 text-xs">
+                          {faq.answer}
+                        </div>
+                      )}
+                    </div>
+                  ))}
+                </div>
 
-              <div className="text-center pt-8">
-                <button
-                  onClick={() => { setActiveView('faqs'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
-                  className="text-xs font-mono text-[#2e5b62] hover:underline uppercase font-bold"
-                >
-                  View All FAQ Support Categories
-                </button>
+                <div className="text-center pt-8">
+                  <button
+                    onClick={() => { setActiveView('faqs'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
+                    className="text-xs font-mono text-emerald-300 hover:text-emerald-200 uppercase font-black bg-slate-900/80 hover:bg-slate-900/90 px-4 py-2 rounded-xl transition-all shadow-sm cursor-pointer hover:scale-105 inline-block"
+                  >
+                    View All FAQ Support Categories
+                  </button>
+                </div>
               </div>
             </section>
 
@@ -589,30 +619,43 @@ export default function App() {
 
         {/* VIEW E: FAQs VIEW */}
         {activeView === 'faqs' && (
-          <div className="max-w-3xl mx-auto px-4 py-12 space-y-10 animate-fade-in">
-            <div className="text-center space-y-3">
-              <span className="font-mono text-xs text-[#2e5b62] font-semibold bg-[#eef4f4] px-3.5 py-1 rounded-full uppercase">Support Center</span>
-              <h1 className="text-3xl font-sans font-black text-[#111827]">Frequently Asked Questions</h1>
-              <p className="text-gray-500 text-sm">Comprehensive answers about HPLC validation reports, crypto checkout, and UK refrigerated delivery policies.</p>
-            </div>
+          <div 
+            className="max-w-4xl mx-auto px-6 py-12 my-8 rounded-3xl border border-gray-200/50 shadow-sm relative overflow-hidden bg-cover bg-center text-white animate-fade-in"
+            style={{ 
+              backgroundImage: 'url("/FAQS.avif")', 
+              backgroundSize: 'cover', 
+              backgroundPosition: 'center', 
+              backgroundRepeat: 'no-repeat' 
+            }}
+          >
+            {/* Soft overlay to ensure readability while keeping image fully visible and sharp */}
+            <div className="absolute inset-0 bg-slate-950/30 pointer-events-none" />
 
-            <div className="space-y-4 pt-6">
-              {faqs.map((faq, idx) => (
-                <div key={faq.id} className="bg-white rounded-2xl border border-gray-100 overflow-hidden text-sm">
-                  <button
-                    onClick={() => setOpenFaqIndex(openFaqIndex === idx ? null : idx)}
-                    className="w-full bg-white hover:bg-slate-50 px-6 py-4 flex justify-between items-center text-[#132c30] font-semibold text-left transition-colors"
-                  >
-                    <span>{faq.question}</span>
-                    {openFaqIndex === idx ? <ChevronUp className="w-4 h-4 text-gray-400" /> : <ChevronDown className="w-4 h-4 text-gray-400" />}
-                  </button>
-                  {openFaqIndex === idx && (
-                    <div className="px-6 py-4 bg-slate-50 text-gray-500 leading-relaxed border-t border-gray-100 text-xs">
-                      {faq.answer}
-                    </div>
-                  )}
-                </div>
-              ))}
+            <div className="relative z-10 space-y-10">
+              <div className="text-center space-y-3">
+                <span className="font-mono text-xs text-emerald-300 font-extrabold tracking-wider uppercase bg-slate-900/70 px-3.5 py-1 rounded-full inline-block">Support Center</span>
+                <h1 className="text-3xl font-sans font-black text-white drop-shadow-sm">Frequently Asked Questions</h1>
+                <p className="text-slate-100 text-sm max-w-xl mx-auto bg-slate-900/50 p-3 rounded-2xl border border-white/5 backdrop-blur-xs">Comprehensive answers about HPLC validation reports, crypto checkout, and UK refrigerated delivery policies.</p>
+              </div>
+
+              <div className="space-y-4 max-w-2xl mx-auto">
+                {faqs.map((faq, idx) => (
+                  <div key={faq.id} className="bg-white/95 hover:bg-white rounded-2xl border border-white/10 overflow-hidden text-sm transition-all duration-200 shadow-sm">
+                    <button
+                      onClick={() => setOpenFaqIndex(openFaqIndex === idx ? null : idx)}
+                      className="w-full px-6 py-4 flex justify-between items-center text-[#132c30] font-bold text-left transition-colors"
+                    >
+                      <span>{faq.question}</span>
+                      {openFaqIndex === idx ? <ChevronUp className="w-4 h-4 text-[#2e5b62]" /> : <ChevronDown className="w-4 h-4 text-[#2e5b62]" />}
+                    </button>
+                    {openFaqIndex === idx && (
+                      <div className="px-6 py-4 bg-slate-50 text-slate-600 font-medium leading-relaxed border-t border-slate-100 text-xs">
+                        {faq.answer}
+                      </div>
+                    )}
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
         )}

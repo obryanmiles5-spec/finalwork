@@ -93,6 +93,7 @@ export default function ProductCard({
           alt={product.seoTitle || product.name} 
           className="w-full h-full object-contain transform group-hover:scale-105 transition-transform duration-500"
           loading="lazy"
+          src={product.image}
           fallbackSvg={product.fallbackSvg}
         />
         {/* Subtle hover gradient overlay */}

@@ -91,6 +91,7 @@ export default function Hero({ onShopNowClick }: HeroProps) {
                   productId="retatrutide-10mg"
                   alt="Alluvi Retat 10mg" 
                   className="w-full h-full object-contain transform group-hover:scale-105 transition-transform duration-500"
+                  src="/images/Retatrutide 10mg (Lyophilized Peptide).webp"
                   fallbackSvg={getPeptideSvg('#2e5b62', '#10b981', 'RETAT', '10 MG')}
                 />
               </div>
