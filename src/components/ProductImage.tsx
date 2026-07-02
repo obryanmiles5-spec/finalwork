@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 
 interface ProductImageProps {
   productId: string;
@@ -6,31 +6,18 @@ interface ProductImageProps {
   className?: string;
   loading?: 'lazy' | 'eager';
   fallbackSvg?: string;
-  src?: string;
 }
 
-export function ProductImage({ productId, alt, className = '', loading = 'lazy', fallbackSvg, src }: ProductImageProps) {
-  const initialSrc = src || fallbackSvg || '';
-  const [imgSrc, setImgSrc] = useState(initialSrc);
-
-  useEffect(() => {
-    setImgSrc(src || fallbackSvg || '');
-  }, [src, fallbackSvg]);
-
-  const handleError = () => {
-    // If the primary image path fails to load, gracefully fall back to the beautifully generated SVG
-    if (fallbackSvg && imgSrc !== fallbackSvg) {
-      setImgSrc(fallbackSvg);
-    }
-  };
+export function ProductImage({ productId, alt, className = '', loading = 'lazy', fallbackSvg }: ProductImageProps) {
+  // Use the beautifully generated SVG data URI as the primary clean-slate source
+  const src = fallbackSvg || '';
 
   return (
     <img
-      src={imgSrc}
+      src={src}
       alt={alt}
       className={className}
       loading={loading}
-      onError={handleError}
       referrerPolicy="no-referrer"
     />
   );

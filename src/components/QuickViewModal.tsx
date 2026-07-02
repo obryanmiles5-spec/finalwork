@@ -10,6 +10,7 @@ interface QuickViewModalProps {
   isInCart: boolean;
   relatedProducts: Product[];
   onSelectRelated: (product: Product) => void;
+  cart?: any[];
 }
 
 export default function QuickViewModal({
@@ -18,12 +19,38 @@ export default function QuickViewModal({
   onAddToCart,
   isInCart,
   relatedProducts,
-  onSelectRelated
+  onSelectRelated,
+  cart
 }: QuickViewModalProps) {
   const [activeTab, setActiveTab] = useState<'info' | 'specs' | 'reconstitution'>('info');
   const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(null);
 
+  const [selectedVariationId, setSelectedVariationId] = useState<string | null>(
+    product && product.type === 'variable' && product.variations && product.variations.length > 0
+      ? product.variations[0].id
+      : null
+  );
+
+  React.useEffect(() => {
+    if (product) {
+      setSelectedVariationId(
+        product.type === 'variable' && product.variations && product.variations.length > 0
+          ? product.variations[0].id
+          : null
+      );
+    }
+  }, [product]);
+
   if (!product) return null;
+
+  const currentVariation = product.variations?.find(v => v.id === selectedVariationId);
+  const displayPrice = currentVariation ? currentVariation.price : product.price;
+  const displaySpec = currentVariation ? currentVariation.spec : product.concentration;
+  const displayName = currentVariation ? currentVariation.name : product.name;
+
+  const isCurrentlyInCart = cart
+    ? cart.some(item => item.product.id === (selectedVariationId || product.id))
+    : isInCart;
 
   const toggleFaq = (index: number) => {
     setOpenFaqIndex(openFaqIndex === index ? null : index);
@@ -61,7 +88,6 @@ export default function QuickViewModal({
                   productId={product.id}
                   alt={product.name} 
                   className="w-full h-full object-contain"
-                  src={product.image}
                   fallbackSvg={product.fallbackSvg}
                 />
                 
@@ -94,7 +120,7 @@ export default function QuickViewModal({
                       onClick={() => onSelectRelated(rel)}
                       className="bg-[#f8fafc] hover:bg-[#eef4f4] border border-gray-100 hover:border-[#2e5b62]/30 p-2.5 rounded-xl cursor-pointer flex flex-col items-center justify-between transition-colors h-24"
                     >
-                      <ProductImage productId={rel.id} alt={rel.name} className="w-10 h-10 object-contain" src={rel.image} fallbackSvg={rel.fallbackSvg} />
+                      <ProductImage productId={rel.id} alt={rel.name} className="w-10 h-10 object-contain" fallbackSvg={rel.fallbackSvg} />
                       <span className="text-[9px] font-sans font-bold text-center text-gray-700 truncate w-full">{rel.concentration} {rel.category}</span>
                     </div>
                   ))}
@@ -241,28 +267,58 @@ export default function QuickViewModal({
 
               </div>
 
+              {/* Variation Selector if Variable */}
+              {product.type === 'variable' && product.variations && (
+                <div className="mt-6 p-4 bg-slate-50 border border-slate-100 rounded-2xl">
+                  <label className="text-xs font-mono text-[#2e5b62] font-semibold block mb-1.5">SELECT SPECIFICATION PACK:</label>
+                  <select
+                    value={selectedVariationId || ''}
+                    onChange={(e) => setSelectedVariationId(e.target.value)}
+                    className="w-full bg-white border border-slate-200 text-[#132c30] text-sm rounded-xl py-3 px-4 focus:outline-none focus:ring-1 focus:ring-[#2e5b62] focus:border-[#2e5b62] font-mono cursor-pointer transition-colors"
+                  >
+                    {product.variations.map((v) => (
+                      <option key={v.id} value={v.id}>
+                        {v.spec} - £{v.price.toFixed(2)}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+              )}
+
               {/* Bottom Drawer adding to cart */}
               <div className="flex items-center justify-between mt-8 pt-6 border-t border-gray-200">
                 <div>
                   <span className="text-[10px] font-mono block text-gray-400">RESEARCH PRICE (INCL. UK EXPEDITED DELIVERY):</span>
                   <div className="flex items-baseline space-x-1">
                     <span className="text-2xl sm:text-3xl font-mono font-bold text-[#111827]">
-                      £{product.price.toFixed(2)}
+                      £{displayPrice.toFixed(2)}
                     </span>
-                    <span className="text-xs text-gray-400 uppercase">GBP / VIAL</span>
+                    <span className="text-xs text-gray-400 uppercase">GBP / VIALS</span>
                   </div>
                 </div>
 
                 <button
                   id={`quick-add-cart-${product.id}`}
-                  onClick={() => onAddToCart(product)}
+                  onClick={() => {
+                    if (product.type === 'variable' && currentVariation) {
+                      onAddToCart({
+                        ...product,
+                        id: currentVariation.id,
+                        name: `${product.name} (${currentVariation.spec})`,
+                        price: currentVariation.price,
+                        concentration: currentVariation.spec,
+                      });
+                    } else {
+                      onAddToCart(product);
+                    }
+                  }}
                   className={`px-8 py-4 rounded-xl font-bold uppercase tracking-wider flex items-center space-x-2 transition-all duration-300 transform hover:-translate-y-0.5 shadow-md cursor-pointer ${
-                    isInCart
+                    isCurrentlyInCart
                       ? 'bg-[#10b981] hover:bg-[#059669] text-white'
                       : 'bg-[#132c30] hover:bg-[#2e5b62] text-white shadow-[#132c30]/10'
                   }`}
                 >
-                  {isInCart ? (
+                  {isCurrentlyInCart ? (
                     <>
                       <Check className="w-4 h-4" />
                       <span>In Cart</span>

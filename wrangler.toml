@@ -1,6 +1,0 @@
-#:schema node_modules/wrangler/config-schema.json
-name = "react-example"
-compatibility_date = "2026-06-30"
-
-[assets]
-directory = "./dist"

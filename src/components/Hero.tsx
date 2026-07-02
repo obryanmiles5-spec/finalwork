@@ -17,7 +17,7 @@ export default function Hero({ onShopNowClick }: HeroProps) {
     <section 
       id="hero-section" 
       className="relative overflow-hidden py-20 md:py-28 border-b border-[#2e5b62]/20 bg-cover bg-center bg-no-repeat text-white"
-      style={{ backgroundImage: 'url("/Home.png")' }}
+      style={{ backgroundImage: 'url("Home.png")' }}
     >
       {/* Premium luxury translucent overlay that makes the beautiful background image highly visible while ensuring text contrasts perfectly and looks premium */}
       <div className="absolute inset-0 bg-gradient-to-r from-[#0d1c1f]/85 via-[#132c30]/60 to-[#0d1c1f]/75 z-0" />
@@ -91,7 +91,6 @@ export default function Hero({ onShopNowClick }: HeroProps) {
                   productId="retatrutide-10mg"
                   alt="Alluvi Retat 10mg" 
                   className="w-full h-full object-contain transform group-hover:scale-105 transition-transform duration-500"
-                  src="/images/Retatrutide 10mg (Lyophilized Peptide).webp"
                   fallbackSvg={getPeptideSvg('#2e5b62', '#10b981', 'RETAT', '10 MG')}
                 />
               </div>

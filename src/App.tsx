@@ -300,6 +300,7 @@ export default function App() {
                     isCompared={compareList.includes(p.id)}
                     onToggleCompare={handleToggleCompare}
                     isInCart={cart.some((item) => item.product.id === p.id)}
+                    cart={cart}
                   />
                 ))}
               </div>
@@ -366,51 +367,38 @@ export default function App() {
             </section>
 
             {/* 6. FAQ PREVIEW (4 highly relevant FAQs) */}
-            <section 
-              className="max-w-4xl mx-auto px-6 py-12 my-12 rounded-3xl border border-gray-200/50 shadow-sm relative overflow-hidden bg-slate-900/5 text-white"
-              style={{ 
-                backgroundImage: 'url("/FAQS.avif")', 
-                backgroundSize: 'cover', 
-                backgroundPosition: 'center', 
-                backgroundRepeat: 'no-repeat' 
-              }}
-            >
-              {/* Soft overlay to ensure readability while keeping image fully visible and sharp */}
-              <div className="absolute inset-0 bg-slate-950/30 pointer-events-none" />
-              
-              <div className="relative z-10">
-                <div className="text-center space-y-2 mb-10">
-                  <span className="font-mono text-xs text-emerald-300 font-extrabold tracking-wider uppercase bg-slate-900/70 px-3 py-1 rounded-full inline-block">Scientific Support</span>
-                  <h2 className="text-3xl font-sans font-black text-white drop-shadow-sm">Frequently Answered Inquiries</h2>
-                </div>
+            <section className="max-w-4xl mx-auto px-4 py-8">
+              <div className="text-center space-y-2 mb-10">
+                <span className="font-mono text-xs text-[#2e5b62] font-bold uppercase">Scientific Support</span>
+                <h2 className="text-3xl font-sans font-black text-[#111827]">Frequently Answered Inquiries</h2>
+              </div>
 
-                <div className="space-y-3 max-w-2xl mx-auto">
-                  {faqs.slice(0, 4).map((faq, idx) => (
-                    <div key={faq.id} className="bg-white/95 hover:bg-white backdrop-blur-none rounded-2xl border border-white/10 overflow-hidden text-sm transition-all duration-200 shadow-sm">
-                      <button
-                        onClick={() => setOpenFaqIndex(openFaqIndex === idx ? null : idx)}
-                        className="w-full px-6 py-4 flex justify-between items-center text-[#132c30] font-bold text-left transition-colors"
-                      >
-                        <span>{faq.question}</span>
-                        {openFaqIndex === idx ? <ChevronUp className="w-4 h-4 text-[#2e5b62]" /> : <ChevronDown className="w-4 h-4 text-[#2e5b62]" />}
-                      </button>
-                      {openFaqIndex === idx && (
-                        <div className="px-6 py-4 bg-slate-50 text-slate-600 font-medium leading-relaxed border-t border-slate-100 text-xs">
-                          {faq.answer}
-                        </div>
-                      )}
-                    </div>
-                  ))}
-                </div>
+              <div className="space-y-3">
+                {faqs.slice(0, 4).map((faq, idx) => (
+                  <div key={faq.id} className="bg-white rounded-2xl border border-gray-100 overflow-hidden text-sm">
+                    <button
+                      onClick={() => setOpenFaqIndex(openFaqIndex === idx ? null : idx)}
+                      className="w-full bg-white hover:bg-slate-50 px-6 py-4 flex justify-between items-center text-[#132c30] font-semibold text-left transition-colors"
+                    >
+                      <span>{faq.question}</span>
+                      {openFaqIndex === idx ? <ChevronUp className="w-4 h-4 text-gray-400" /> : <ChevronDown className="w-4 h-4 text-gray-400" />}
+                    </button>
+                    {openFaqIndex === idx && (
+                      <div className="px-6 py-4 bg-slate-50 text-gray-500 leading-relaxed border-t border-gray-100 text-xs">
+                        {faq.answer}
+                      </div>
+                    )}
+                  </div>
+                ))}
+              </div>
 
-                <div className="text-center pt-8">
-                  <button
-                    onClick={() => { setActiveView('faqs'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
-                    className="text-xs font-mono text-emerald-300 hover:text-emerald-200 uppercase font-black bg-slate-900/80 hover:bg-slate-900/90 px-4 py-2 rounded-xl transition-all shadow-sm cursor-pointer hover:scale-105 inline-block"
-                  >
-                    View All FAQ Support Categories
-                  </button>
-                </div>
+              <div className="text-center pt-8">
+                <button
+                  onClick={() => { setActiveView('faqs'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
+                  className="text-xs font-mono text-[#2e5b62] hover:underline uppercase font-bold"
+                >
+                  View All FAQ Support Categories
+                </button>
               </div>
             </section>
 
@@ -456,7 +444,7 @@ export default function App() {
             {/* 8. NEWSLETTER SIGNUP */}
             <section 
               className="relative py-20 border-t border-b border-gray-200/50 bg-cover bg-center overflow-hidden"
-              style={{ backgroundImage: "url('/Bckground%20Image.png')" }}
+              style={{ backgroundImage: "url('Bckground%20Image.png')" }}
             >
               {/* Overlay for high contrast and readability */}
               <div className="absolute inset-0 bg-slate-900/80 backdrop-blur-[1px]" />
@@ -576,6 +564,7 @@ export default function App() {
                     isCompared={compareList.includes(p.id)}
                     onToggleCompare={handleToggleCompare}
                     isInCart={cart.some((item) => item.product.id === p.id)}
+                    cart={cart}
                   />
                 ))}
               </div>
@@ -619,43 +608,30 @@ export default function App() {
 
         {/* VIEW E: FAQs VIEW */}
         {activeView === 'faqs' && (
-          <div 
-            className="max-w-4xl mx-auto px-6 py-12 my-8 rounded-3xl border border-gray-200/50 shadow-sm relative overflow-hidden bg-cover bg-center text-white animate-fade-in"
-            style={{ 
-              backgroundImage: 'url("/FAQS.avif")', 
-              backgroundSize: 'cover', 
-              backgroundPosition: 'center', 
-              backgroundRepeat: 'no-repeat' 
-            }}
-          >
-            {/* Soft overlay to ensure readability while keeping image fully visible and sharp */}
-            <div className="absolute inset-0 bg-slate-950/30 pointer-events-none" />
+          <div className="max-w-3xl mx-auto px-4 py-12 space-y-10 animate-fade-in">
+            <div className="text-center space-y-3">
+              <span className="font-mono text-xs text-[#2e5b62] font-semibold bg-[#eef4f4] px-3.5 py-1 rounded-full uppercase">Support Center</span>
+              <h1 className="text-3xl font-sans font-black text-[#111827]">Frequently Asked Questions</h1>
+              <p className="text-gray-500 text-sm">Comprehensive answers about HPLC validation reports, crypto checkout, and UK refrigerated delivery policies.</p>
+            </div>
 
-            <div className="relative z-10 space-y-10">
-              <div className="text-center space-y-3">
-                <span className="font-mono text-xs text-emerald-300 font-extrabold tracking-wider uppercase bg-slate-900/70 px-3.5 py-1 rounded-full inline-block">Support Center</span>
-                <h1 className="text-3xl font-sans font-black text-white drop-shadow-sm">Frequently Asked Questions</h1>
-                <p className="text-slate-100 text-sm max-w-xl mx-auto bg-slate-900/50 p-3 rounded-2xl border border-white/5 backdrop-blur-xs">Comprehensive answers about HPLC validation reports, crypto checkout, and UK refrigerated delivery policies.</p>
-              </div>
-
-              <div className="space-y-4 max-w-2xl mx-auto">
-                {faqs.map((faq, idx) => (
-                  <div key={faq.id} className="bg-white/95 hover:bg-white rounded-2xl border border-white/10 overflow-hidden text-sm transition-all duration-200 shadow-sm">
-                    <button
-                      onClick={() => setOpenFaqIndex(openFaqIndex === idx ? null : idx)}
-                      className="w-full px-6 py-4 flex justify-between items-center text-[#132c30] font-bold text-left transition-colors"
-                    >
-                      <span>{faq.question}</span>
-                      {openFaqIndex === idx ? <ChevronUp className="w-4 h-4 text-[#2e5b62]" /> : <ChevronDown className="w-4 h-4 text-[#2e5b62]" />}
-                    </button>
-                    {openFaqIndex === idx && (
-                      <div className="px-6 py-4 bg-slate-50 text-slate-600 font-medium leading-relaxed border-t border-slate-100 text-xs">
-                        {faq.answer}
-                      </div>
-                    )}
-                  </div>
-                ))}
-              </div>
+            <div className="space-y-4 pt-6">
+              {faqs.map((faq, idx) => (
+                <div key={faq.id} className="bg-white rounded-2xl border border-gray-100 overflow-hidden text-sm">
+                  <button
+                    onClick={() => setOpenFaqIndex(openFaqIndex === idx ? null : idx)}
+                    className="w-full bg-white hover:bg-slate-50 px-6 py-4 flex justify-between items-center text-[#132c30] font-semibold text-left transition-colors"
+                  >
+                    <span>{faq.question}</span>
+                    {openFaqIndex === idx ? <ChevronUp className="w-4 h-4 text-gray-400" /> : <ChevronDown className="w-4 h-4 text-gray-400" />}
+                  </button>
+                  {openFaqIndex === idx && (
+                    <div className="px-6 py-4 bg-slate-50 text-gray-500 leading-relaxed border-t border-gray-100 text-xs">
+                      {faq.answer}
+                    </div>
+                  )}
+                </div>
+              ))}
             </div>
           </div>
         )}
@@ -867,6 +843,7 @@ export default function App() {
           isInCart={cart.some((item) => item.product.id === selectedProduct.id)}
           relatedProducts={products.filter((p) => p.category === selectedProduct.category && p.id !== selectedProduct.id)}
           onSelectRelated={(p) => setSelectedProduct(p)}
+          cart={cart}
         />
       )}
 
@@ -876,11 +853,14 @@ export default function App() {
           
           {/* Col 1: Brand details */}
           <div className="space-y-4">
-            <div className="flex items-center space-x-2">
+            <div className="flex items-center space-x-2.5">
               <div className="w-10 h-10 flex items-center justify-center">
-                <img src="/Buy%20Retat%20Logo.png" alt="BuyRetat UK Logo" className="h-full w-auto object-contain rounded" referrerPolicy="no-referrer" />
+                <img src="Buy%20Retat%20Logo.png" alt="BuyRetat UK Logo" className="h-full w-auto object-contain rounded-lg" referrerPolicy="no-referrer" />
               </div>
-              <span className="font-sans font-black text-base tracking-[0.15em] text-white">ALLUVI UK</span>
+              <div className="flex flex-col">
+                <span className="font-sans font-black text-base tracking-[0.18em] text-white leading-none">ALLUVI</span>
+                <span className="text-[8px] font-mono tracking-[0.25em] text-[#d97706] uppercase font-bold mt-1">BuyRetat UK</span>
+              </div>
             </div>
             <p className="text-gray-400 leading-relaxed text-[11px]">Certified high-purity triple-agonist reference peptides. Distributed securely inside professional insulated cooling courier systems directly to United Kingdom metabolic study labs.</p>
             <div className="text-[10px] text-rose-400 font-mono font-bold leading-normal bg-rose-400/5 border border-rose-400/20 p-2.5 rounded-xl">

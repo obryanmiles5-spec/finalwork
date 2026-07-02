@@ -19,6 +19,13 @@ export interface Product {
   seoTitle: string;
   seoMetaDesc: string;
   schemaMarkup: string;
+  type?: 'simple' | 'variable' | 'variation';
+  variations?: {
+    id: string;
+    name: string;
+    spec: string;
+    price: number;
+  }[];
 }
 
 export interface BlogPost {

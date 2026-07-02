@@ -13,6 +13,7 @@ interface ProductCardProps {
   isCompared: boolean;
   onToggleCompare: (productId: string) => void;
   isInCart: boolean;
+  cart?: any[];
 }
 
 export default function ProductCard({
@@ -23,8 +24,23 @@ export default function ProductCard({
   onToggleWishlist,
   isCompared,
   onToggleCompare,
-  isInCart
+  isInCart,
+  cart
 }: ProductCardProps) {
+  const [selectedVariationId, setSelectedVariationId] = React.useState<string | null>(
+    product.type === 'variable' && product.variations && product.variations.length > 0
+      ? product.variations[0].id
+      : null
+  );
+
+  const currentVariation = product.variations?.find(v => v.id === selectedVariationId);
+  const displayPrice = currentVariation ? currentVariation.price : product.price;
+  const displaySpec = currentVariation ? currentVariation.spec : product.concentration;
+  const displayName = currentVariation ? currentVariation.name : product.name;
+
+  const isCurrentlyInCart = cart
+    ? cart.some(item => item.product.id === (selectedVariationId || product.id))
+    : isInCart;
   return (
     <div 
       id={`product-card-${product.id}`}
@@ -93,7 +109,6 @@ export default function ProductCard({
           alt={product.seoTitle || product.name} 
           className="w-full h-full object-contain transform group-hover:scale-105 transition-transform duration-500"
           loading="lazy"
-          src={product.image}
           fallbackSvg={product.fallbackSvg}
         />
         {/* Subtle hover gradient overlay */}
@@ -138,27 +153,58 @@ export default function ProductCard({
             <span className="font-bold uppercase">Formula:</span>
             <span className="text-[#2e5b62]">{product.specifications['Molecular Formula'] || product.chemicalName}</span>
           </div>
+
+          {/* Variation Selector if Variable */}
+          {product.type === 'variable' && product.variations && (
+            <div className="pt-2" onClick={(e) => e.stopPropagation()}>
+              <label className="text-[10px] font-mono text-[#2e5b62] font-semibold block mb-1">SELECT SPECIFICATION:</label>
+              <select
+                value={selectedVariationId || ''}
+                onChange={(e) => setSelectedVariationId(e.target.value)}
+                className="w-full bg-slate-50 hover:bg-slate-100 border border-slate-200 text-[#132c30] text-xs rounded-xl py-2 px-3 focus:outline-none focus:ring-1 focus:ring-[#2e5b62] focus:border-[#2e5b62] font-mono cursor-pointer transition-colors"
+              >
+                {product.variations.map((v) => (
+                  <option key={v.id} value={v.id}>
+                    {v.spec} - £{v.price.toFixed(2)}
+                  </option>
+                ))}
+              </select>
+            </div>
+          )}
         </div>
 
         {/* Pricing and Call To Action */}
         <div className="flex items-center justify-between pt-2 border-t border-gray-50">
           <div>
-            <span className="text-[10px] font-mono block text-gray-400">RESEARCH PRICE:</span>
+            <span className="text-[10px] font-mono block text-gray-400">RESEARCH SPEC: {displaySpec}</span>
             <span className="text-lg font-mono font-bold text-[#111827]">
-              £{product.price.toFixed(2)}
+              £{displayPrice.toFixed(2)}
             </span>
           </div>
 
           <button
             id={`add-to-cart-btn-${product.id}`}
-            onClick={(e) => { e.stopPropagation(); onAddToCart(product); }}
+            onClick={(e) => {
+              e.stopPropagation();
+              if (product.type === 'variable' && currentVariation) {
+                onAddToCart({
+                  ...product,
+                  id: currentVariation.id,
+                  name: `${product.name} (${currentVariation.spec})`,
+                  price: currentVariation.price,
+                  concentration: currentVariation.spec,
+                });
+              } else {
+                onAddToCart(product);
+              }
+            }}
             className={`px-4 py-2.5 rounded-xl text-xs font-semibold uppercase tracking-wider flex items-center space-x-1.5 transition-all duration-300 cursor-pointer ${
-              isInCart 
+              isCurrentlyInCart 
                 ? 'bg-[#10b981] hover:bg-[#059669] text-white' 
                 : 'bg-[#132c30] hover:bg-[#2e5b62] text-white shadow-md hover:shadow-lg'
             }`}
           >
-            {isInCart ? (
+            {isCurrentlyInCart ? (
               <>
                 <Check className="w-3.5 h-3.5" />
                 <span>In Cart</span>

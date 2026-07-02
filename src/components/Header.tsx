@@ -80,14 +80,14 @@ export default function Header({
           >
             {/* Brand Logo: Buy Retat Logo.png */}
             <div className="w-15 h-15 flex items-center justify-center group-hover:scale-105 transition-transform duration-300">
-              <img src="/Buy%20Retat%20Logo.png" alt="BuyRetat UK Logo" className="h-full w-auto object-contain rounded-lg" referrerPolicy="no-referrer" />
+              <img src="Buy%20Retat%20Logo.png" alt="BuyRetat UK Logo" className="h-full w-auto object-contain rounded-lg" referrerPolicy="no-referrer" />
             </div>
-            <div>
-              <div className="flex items-center space-x-1.5">
-                <span className="font-sans font-black text-2xl tracking-[0.15em] text-[#132c30]">ALLUVI</span>
-                <span className="text-[11px] font-mono tracking-widest text-[#d97706] border border-[#d97706]/30 px-1 py-0.5 rounded leading-none bg-[#d97706]/5">UK</span>
+            <div className="flex flex-col">
+              <div className="flex items-center space-x-2 leading-none">
+                <span className="font-sans font-black text-2.5xl tracking-[0.18em] bg-gradient-to-r from-[#132c30] via-[#2e5b62] to-[#0f172a] bg-clip-text text-transparent">ALLUVI</span>
+                <span className="text-[10px] font-mono font-extrabold tracking-wider text-[#d97706] border border-[#d97706]/40 px-1.5 py-0.5 rounded leading-none bg-[#d97706]/5 shadow-sm">UK</span>
               </div>
-              <span className="block text-[10px] font-mono tracking-[0.25em] text-[#2e5b62] uppercase font-bold">BuyRetat Peptide</span>
+              <span className="block text-[9px] font-mono tracking-[0.28em] text-[#2e5b62] uppercase font-semibold mt-1">BUYRETAT PEPTIDE</span>
             </div>
           </div>
 
